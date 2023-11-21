@@ -32,7 +32,11 @@ const FavouriteMoviesPage = () => {
   });
 
   if (favourites.length === 0) {
-    return <h1>No Favourite Movies</h1>;
+    return (
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        <h1>You have not favourited any movies yet...</h1>
+      </div>
+    )
   }
 
   return (
