@@ -9,6 +9,8 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 
 const root = {
     display: "flex",
@@ -20,7 +22,7 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {
+const MovieDetails = ({ movie, Availability }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -65,6 +67,29 @@ const MovieDetails = ({ movie }) => {
             <Chip label={c.name} sx={{...chip}} />
           </li>
         ))}
+      </Paper>
+      <Paper component="ul" sx={{...root}}>
+        <Chip label="Where to watch - Ireland" icon={<ArrowDropDownIcon/>} sx={{...chip, backgroundColor: 'Orange', fontSize: '1.2em', padding: '10px', borderRadius: '5'}} />
+      </Paper>
+      <Paper component="ul" sx={{...root}}>
+        <Chip label="Rent" sx={{...chip}} color="primary" />
+        {Availability && Availability.results && Availability.results.IE && Availability.results.IE.rent ?
+          Availability.results.IE.rent.map((r) => (
+            <li key={r.provider_name}>
+              <Chip label={r.provider_name} sx={{...chip}} />
+            </li>
+          ))
+        : <Chip label="No data found..." sx={{...chip}} />}
+      </Paper>
+      <Paper component="ul" sx={{...root}}>
+        <Chip label="Buy" sx={{...chip}} color="primary" />
+        {Availability && Availability.results && Availability.results.IE && Availability.results.IE.buy ? 
+          Availability.results.IE.buy.map((b) => (
+            <li key={b.provider_name}>
+              <Chip label={b.provider_name} sx={{...chip}} />
+            </li>
+          ))
+        : <Chip label="No data found..." sx={{...chip}} />}
       </Paper>
       <Fab
         color="secondary"

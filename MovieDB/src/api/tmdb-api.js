@@ -101,3 +101,17 @@ export const getTrendingMovies = () => {
       throw error;
     });
 };
+
+export const getWatchAvailability = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  return fetch (
+    `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error(res.json().message);
+    }
+    return res.json();
+  })
+}

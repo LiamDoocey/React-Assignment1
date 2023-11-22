@@ -1,18 +1,27 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
-import { getMovie } from '../api/tmdb-api';
+import { getMovie, getWatchAvailability } from '../api/tmdb-api';
 import { useQuery } from "react-query";
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
 import Spinner from '../components/spinner'
-// import useMovie from "../hooks/useMovie";
 
-const MoviePage = (props) => {
+const MoviePage = () => {
   const { id } = useParams();
   const { data: movie, error, isLoading, isError } = useQuery(
     ["movie", { id: id }],
     getMovie
   );
+  const { data: Avail } = useQuery(
+    ["watch", { id: id }],
+    getWatchAvailability
+  );
+
+  if (Avail) {
+    if (!Avail || !Avail.results) {
+      console.log("No Streaming data available");
+    }
+  }
 
   if (isLoading) {
     return <Spinner />;
@@ -27,7 +36,7 @@ const MoviePage = (props) => {
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} />
+            <MovieDetails movie={movie} Availability={Avail}/>
           </PageTemplate>
         </>
       ) : (
