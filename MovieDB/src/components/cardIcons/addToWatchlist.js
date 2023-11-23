@@ -10,6 +10,7 @@ const AddToWatchlistIcon = ({ movie }) => {
     const handleAddToWatchlist = (e) => {
         e.preventDefault();
         context.addToWatchlist(movie);
+        console.log(movie.original_title + " added to watchlist. [" + movie.id + "]");
     }
 
     return (

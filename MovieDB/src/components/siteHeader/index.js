@@ -44,8 +44,9 @@ const SiteHeader = ({ history }) => {
         <Toolbar>
             <Typography variant="h4" sx={{ flexGrow: 1 }}>
               MovieDB
+              <img src="/popcorn512.png" alt="SITE-LOGO" width="50" height="50" style={{ position: 'relative', top: '5px'}}/>
             </Typography>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1, position: 'absolute', left: '40%'}}>
             All you ever wanted to know about Movies!
           </Typography>
             {isMobile ? (

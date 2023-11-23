@@ -8,7 +8,9 @@ const AddToFavouritesIcon = ({ movie }) => {
 
     const handleAddToFavourites = (e) => {
         e.preventDefault();
-        context.addToFavourites(movie);
+        const movieId = { id: movie.id };
+        context.addToFavourites(movieId);
+        console.log(movie.original_title + " added to favourites.");
     };
 
     return (

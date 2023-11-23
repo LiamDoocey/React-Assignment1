@@ -14,7 +14,7 @@ const FavouriteMoviesPage = () => {
   const favouriteMovieQueries = useQueries(
     favourites.map((movieId) => {
       return {
-        queryKey: ["movie", { id: movieId }],
+        queryKey: ["movie", { id: movieId.id }],
         queryFn: getMovie,
       };
     })

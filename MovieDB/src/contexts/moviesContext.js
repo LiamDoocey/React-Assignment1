@@ -9,8 +9,9 @@ const MoviesContextProvider = (props) => {
 
     const addToFavourites = (movie) => {
         let newFavourites = [];
+        const movieId = { id: movie.id };
         if (!favourites.includes(movie.id)) {
-            newFavourites = [...favourites, movie.id]
+            newFavourites = [...favourites, movieId]
         }
         else{
             newFavourites = [...favourites];
@@ -28,14 +29,14 @@ const MoviesContextProvider = (props) => {
 
     const addToWatchlist = (movie) => {
         let newWatchlist = [];
+        const movieId = { id: movie.id };
         if (!watchlist.includes(movie.id)) {
-            newWatchlist = [...watchlist, movie.id]
+            newWatchlist = [...watchlist, movieId]
         }
         else{
             newWatchlist = [...watchlist];
         }
         setWatchlist(newWatchlist)
-        console.log(newWatchlist)
     }
 
     return (

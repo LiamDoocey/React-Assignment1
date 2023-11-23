@@ -7,7 +7,7 @@ import AddtoFavouritesIcon from '../components/cardIcons/addToFavourites';
 
 
 const HomePage = () => {
-
+  
   const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
 
   if (isLoading) {
