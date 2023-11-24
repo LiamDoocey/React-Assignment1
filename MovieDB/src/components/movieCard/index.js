@@ -62,12 +62,15 @@ export default function MovieCard({movie, action}) {
                         <Avatar sx = {{ backgroundColor: "red" }}>
                             <FavoriteIcon />
                         </Avatar>
-                    ) : updatedMovie.watchlist ? (
+                    ) : null
+                }
+                action = {
+                    updatedMovie.watchlist ? (
                         <Avatar sx = {{ backgroundColor: "green" }}>
                             <PlaylistAddCheckIcon />
                         </Avatar>
                     ) : null
-                }
+                    }
                 title = {
                     <Typography variant = "h5" component = "p">
                         {updatedMovie.title}{" "}

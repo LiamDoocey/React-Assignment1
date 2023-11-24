@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import MovieIcon from '@mui/icons-material/Movie';
 
 
 const root = {
@@ -22,8 +23,16 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie, Availability }) => {
+const MovieDetails = ({ movie, Availability, cast, trailer }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  let trailerKey = '';
+if (trailer && trailer.results) {
+    const trailerObj = trailer.results.find(result => result.type === 'Trailer');
+    if (trailerObj) {
+        trailerKey = trailerObj.key;
+    }
+}
 
   return (
     <>
@@ -91,6 +100,30 @@ const MovieDetails = ({ movie, Availability }) => {
           ))
         : <Chip label="No data found..." sx={{...chip}} />}
       </Paper>
+
+        {cast && cast.cast ? 
+        cast.cast.map((c) => (
+          <li key={c.name}>
+            <Chip label={<><strong>{c.name}</strong> as "{c.character}"</>} sx={{...chip}} />
+          </li>
+        )) : <Chip label="No data found..." sx={{...chip}} />} 
+        {trailerKey ?
+          <div style={{position: 'absolute', top: '750px', right: '275px', width: '65%'}}>
+            <iframe
+              width="70%"
+              height="500"
+              src={`https://www.youtube.com/embed/${trailerKey}`}
+              title="Trailer"
+              style={{position: 'absolute', top: '50%', left: '50%'}}
+            /> 
+          </div>
+          :    
+          <Typography variant="h6" color="textSecondary" align="center">
+            <MovieIcon style={{ fontSize: 50 }} />
+            <br />
+            Trailer not found...
+          </Typography>
+        }
       <Fab
         color="secondary"
         variant="extended"

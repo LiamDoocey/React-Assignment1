@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
-import { getMovie, getWatchAvailability } from '../api/tmdb-api';
+import { getMovie, getWatchAvailability, getActors, getTrailer } from '../api/tmdb-api';
 import { useQuery } from "react-query";
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
@@ -16,6 +16,16 @@ const MoviePage = () => {
     ["watch", { id: id }],
     getWatchAvailability
   );
+
+  const {data: cast} = useQuery(
+    ["cast", {id: id}], 
+    getActors
+    );
+
+    const {data: trailer} = useQuery(
+      ["trailer", {id: id}], 
+      getTrailer
+    );
 
   if (Avail) {
     if (!Avail || !Avail.results) {
@@ -36,7 +46,7 @@ const MoviePage = () => {
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} Availability={Avail}/>
+            <MovieDetails movie={movie} Availability={Avail} cast={cast} trailer={trailer}/>
           </PageTemplate>
         </>
       ) : (

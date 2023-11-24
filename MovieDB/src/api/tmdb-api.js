@@ -145,3 +145,31 @@ export const getLatestMovies = () => {
       throw error;
     });
 };
+
+export const getActors = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error(res.json().message);
+    }
+    return res.json();
+  })
+};
+
+export const getTrailer = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error(res.json().message);
+    }
+    return res.json();
+  })
+};
