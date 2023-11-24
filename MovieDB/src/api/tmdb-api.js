@@ -130,3 +130,18 @@ export const getCurrentlyInCinema = () => {
       throw error;
     });
 };
+
+export const getLatestMovies = () => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/latest?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+  )
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(res.json().message);
+      }
+      return res.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};

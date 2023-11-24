@@ -10,7 +10,8 @@ const MoviesContextProvider = (props) => {
     const addToFavourites = (movie) => {
         let newFavourites = [];
         const movieId = { id: movie.id };
-        if (!favourites.includes(movie.id)) {
+        // Refactor because IDs are not at top level of movie object
+        if (!favourites.some(Favourite => Favourite.id === movie.id)) {
             newFavourites = [...favourites, movieId]
         }
         else{
@@ -24,7 +25,7 @@ const MoviesContextProvider = (props) => {
     };
 
     const removeFromFavourites = (movie) => {
-        setFavourites(favourites.filter((mId) => mId !== movie.id));
+        setFavourites(favourites.filter((mId) => mId.id !== movie.id));
     };
 
     const addToWatchlist = (movie) => {
@@ -39,6 +40,10 @@ const MoviesContextProvider = (props) => {
         setWatchlist(newWatchlist)
     }
 
+    const removeFromWatchlist = (movie) => {
+        setWatchlist(watchlist.filter((mId) => mId.id !== movie.id));
+    }
+
     return (
         <MoviesContext.Provider
             value={{
@@ -48,6 +53,7 @@ const MoviesContextProvider = (props) => {
                 removeFromFavourites,
                 addReview,
                 addToWatchlist,
+                removeFromWatchlist,
             }}
         >
             {props.children}

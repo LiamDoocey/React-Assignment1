@@ -52,6 +52,8 @@ export default function MovieCard({movie, action}) {
         inCinema: checkIdExists(inCinema, movie.id)
     }
 
+    
+
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
@@ -82,7 +84,7 @@ export default function MovieCard({movie, action}) {
                 />
 
             <CardContent>
-                <Grid container>
+                <Grid container >
                     <Grid item xs = {6}>
                         <Typography variant = "h6" component= "p">
                             <CalendarIcon fontSize = "small" />
